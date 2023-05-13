@@ -44,8 +44,17 @@
                     <el-table :data="tableData" border>
 
                         <el-table-column label="Name" prop="name" width="180"></el-table-column>
-                        <el-table-column label="Image" prop="image" width="180"></el-table-column>
-                        <el-table-column label="Gender" prop="gender" width="180"></el-table-column>
+                        <el-table-column label="Image" width="180">
+                            <template slot-scope="scope">
+                                <img width="60px" height="60px" :src="scope.row.image" alt="">
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="Gender" width="180">
+<!--                            插入插槽-->
+                            <template slot-scope="scope">
+                                {{scope.row.gender ==1 ?'man':'feman'}}
+                            </template>
+                        </el-table-column>
                         <el-table-column label="Job" prop="job" width="120"></el-table-column>
                         <el-table-column label="Entrydate" prop="entrydate" width="180"></el-table-column>
                         <el-table-column label="Updatetime" prop="updatetime" width="230"></el-table-column>
@@ -71,10 +80,11 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     data(){
         return{
-            tableDate:[],
+            tableData:[],
             searchForm: {
                 name: '',
                 gender: '',
@@ -92,6 +102,12 @@ export default {
         onSubmit() {
             alert("serach")
         }
+    },
+    mounted() {
+        //发布异步请求
+        axios.get("http://yapi.smart-xwork.cn/mock/169327/emp/list").then((res)=>{
+           this.tableData =  res.data.data;
+        })
     }
 }
 </script>
