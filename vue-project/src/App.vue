@@ -1,19 +1,23 @@
 <template>
   <div>
-    <h1>{{ message }}</h1>
-    <element-view></element-view>
+
+<!--    <element-view></element-view>-->
+      <emp-view></emp-view>
   </div>
 </template>
 
 <script>
-import ElementView from './views/element/ElementView.vue';
+// import ElementView from './views/element/ElementView.vue';
+import EmpView from "@/views/tlias/EmpView.vue";
   export default{
     components:{
-      ElementView
+      // ElementView
+        //员工页面
+        EmpView
     },
     data(){
       return{
-        message:"hello vue"
+        message:"hell1111o vue"
       }
     },
     methods:{
